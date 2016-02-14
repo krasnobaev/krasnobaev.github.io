@@ -12,10 +12,20 @@
     <content>
       <ToggleButton
           icon="sap-icon://hello-world"
-          press="handleToggleButtonPress"
+          press="handleSayHelloWorld"
+      />
+      <ToggleButton
+          icon="sap-icon://play"
+          press="handleStopPlay"
       />
       <zlib:Codemirror
+          id="jseditor"
           theme="solarized"
+          mode="javascript"
+          value="{
+            path: 'examples>code',
+            formatter: '.formatLoadedExample'
+          }"
       />
     </content>
   </Page>

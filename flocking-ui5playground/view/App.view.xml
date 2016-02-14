@@ -7,9 +7,17 @@
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
 >
-  <App>
-    <mvc:XMLView
-        viewName="fplay.view.Main"
-    />
-  </App>
+  <SplitApp>
+    <masterPages>
+      <mvc:XMLView
+          viewName="fplay.view.Master"
+      />
+    </masterPages>
+
+    <detailPages>
+      <mvc:XMLView
+          viewName="fplay.view.Main"
+      />
+    </detailPages>
+  </SplitApp>
 </core:View>

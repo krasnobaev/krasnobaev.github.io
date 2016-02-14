@@ -14,7 +14,7 @@ sap.ui.define([
 ], function (Controller) {
   'use strict';
 
-  var synth = flock.synth({
+  var hisynth = flock.synth({
     synthDef: {
       ugen: 'flock.ugen.sinOsc',
       freq: 440,
@@ -24,16 +24,72 @@ sap.ui.define([
 
   return Controller.extend('fplay.controller.Main', {
 
+    /* events */
+
     /**
+     * play predefined simple synth
+     *
      * @param {sap.ui.base.Event} oControlEvent
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
-    handleToggleButtonPress: function (oControlEvent) {
+    handleSayHelloWorld: function (oControlEvent) {
       if (oControlEvent.getParameter('pressed')) {
-        synth.play();
+        hisynth.play();
       } else {
-        synth.pause();
+        hisynth.pause();
+      }
+    },
+
+    /**
+     * play definition of editor
+     *
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    handleStopPlay: function (oControlEvent) {
+      var isStopped = !flock.enviro.shared.model.isPlaying;
+
+      oControlEvent.getSource().setPressed(isStopped);
+
+      if (isStopped) {
+        oControlEvent.getSource().setIcon('sap-icon://stop');
+
+        $('<script>')
+          .attr('id', 'codemirrorcontent')
+          .attr('type', 'text/javascript')
+          .text('(function () {"use strict";' +
+                   this.byId('jseditor').getValue() +
+                '})();'
+          )
+          .appendTo('head');
+
+        flock.enviro.shared.play();
+      } else {
+        oControlEvent.getSource().setIcon('sap-icon://play');
+
+        flock.enviro.shared.reset();
+        $('#codemirrorcontent').remove();
+      }
+    },
+
+    /* private */
+
+    /**
+     * [formatLoadedExample description]
+     * @param {string[]} aLines
+     * @return {[type]} [description]
+     */
+    formatLoadedExample: function (aLines) {
+      if (typeof aLines === 'undefined' || aLines === null) {
+        return undefined;
+      } else if (Array.isArray(aLines)) {
+        return aLines.join('\n');
+      } else if (aLines === 'string') {
+        return aLines;
+      } else {
+        return undefined;
       }
     },
 

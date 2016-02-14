@@ -11,13 +11,19 @@
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
-], function (Controller) {
+  'fplay/model/Examples',
+], function (Controller, ExamplesModel) {
   'use strict';
 
   return Controller.extend('fplay.controller.App', {
 
-    onOpenDialog: function () {
-      this.getOwnerComponent().helloDialog.open(this.getView());
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onInit: function (oControlEvent) {
+      this.getView().setModel(new ExamplesModel(), 'examples');
     },
 
   });

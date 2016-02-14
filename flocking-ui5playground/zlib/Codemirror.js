@@ -16,7 +16,7 @@ sap.ui.define([
 
   // custom css
   jQuery.sap.includeStyleSheet(
-      jQuery.sap.getModulePath('zlib.Codemirror') + '.css'
+      jQuery.sap.getModulePath('zlib.Codemirror', '.css')
   );
 
   /**
@@ -112,9 +112,10 @@ sap.ui.define([
     dfdAfterRendering: null,
 
     constructor: function () {
-      TextArea.apply(this, arguments);
-
+      // always init private variables before call parent
       this.dfdAfterRendering = jQuery.Deferred();
+
+      TextArea.apply(this, arguments);
     },
 
     /**
