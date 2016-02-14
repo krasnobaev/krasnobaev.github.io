@@ -30,6 +30,9 @@ sap.ui.define([
                      })[0];
 
       oBinding.setContext(oContext);
+
+      var oApp = this.getView().getParent().getParent();
+      oApp.toMaster(oApp.getDetailPages()[0]);
     },
 
     /**

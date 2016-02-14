@@ -8,6 +8,7 @@
  */
 sap.ui.define([
   'sap/ui/core/UIComponent',
+  'fplay/lib/Router',
 ], function (UIComponent) {
   'use strict';
 
@@ -20,6 +21,36 @@ sap.ui.define([
         libs: ['sap.m', 'zlib'],
       },
       rootView: 'fplay.view.App',
+      routing: {
+        config: {
+          routerClass: 'fplay.lib.Router',
+          viewType: 'XML',
+          viewPath: 'fplay.view',
+          clearTarget: false,
+          controlId: '__xmlview0--app',
+          controlAggregation: 'detailPages',
+        },
+
+        routes: [{
+          pattern: '',
+          name: 'main',
+          target: ['scenarios', 'managescenario'],
+        }],
+
+        targets: {
+          scenarios: {
+            controlAggregation: 'masterPages',
+            viewName: 'Master',
+            viewId: 'Master',
+          },
+
+          managescenario: {
+            viewPath: 'siuClassic.modules.manageScenario.view',
+            viewName: 'Main',
+            viewId: 'Main',
+          },
+        },
+      },
     },
 
   });
