@@ -24,7 +24,6 @@ sap.ui.define([
 
   return Controller.extend('fplay.controller.Main', {
 
-    _oRouter: null,
     _oComponent: null,
 
     /* events */
@@ -35,8 +34,8 @@ sap.ui.define([
      * @param {object} oControlEvent.getParameters
      */
     onInit: function (oControlEvent) {
-      this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      this._oRouter.attachRoutePatternMatched(this.onRouteMatched, this);
+      hisynth.pause();
+
       this._oComponent = sap.ui.core.Component.getOwnerComponentFor(
           this.getView()
       );
@@ -48,7 +47,13 @@ sap.ui.define([
      * @param {object} oControlEvent.getParameters
      */
     onNavBack: function (oControlEvent) {
-      this._oRouter.navToMaster();
+      if (sap.ui.Device.system.phone) {
+        this._oComponent._oRouter.navToMaster();
+      } else {
+        sap.ui.getCore().byId(
+            this._oComponent.getRouter()._oConfig.controlId
+        ).showMaster();
+      }
     },
 
     /**

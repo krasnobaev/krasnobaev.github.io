@@ -1,10 +1,11 @@
 /*!
- * UI development toolkit for HTML5 (OpenUI5)
- * (c) Copyright 2009-2016 SAP SE or an SAP affiliate company.
- * Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+ * This file is part of Flocking UI5 Playground
+ * Copyright (C) 2016 Aleksey Krasnobaev <alekseykrasnobaev@gmail.com>
+ *
+ * You should have received a copy of the GNU General Public License
+ * version 3 along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
  */
-
-// Provides acustomized router class for the 'explored' app.
 sap.ui.define([
   'jquery.sap.global',
   'sap/ui/core/routing/Router',
@@ -45,14 +46,19 @@ sap.ui.define([
 
     /**
      * a nav to method that does not write hashes but load the views properly
-     *
-     * @param  {string} sViewName fplay.view.Master
-     * @param  {sap.ui.core.mvc.ViewType} sViewType
      */
-    navToMaster: function (sViewName, sViewType) {
+    navToMaster: function () {
       var oApp = sap.ui.getCore().byId('__xmlview0--app');
       var oView = this.getView('fplay.view.Master', 'XML');
-      oApp.addPage(oView, true);
+      oApp.toMaster(oView.getId(), 'show');
+    },
+
+    /**
+     * a nav to method that does not write hashes but load the views properly
+     */
+    navToMain: function () {
+      var oApp = sap.ui.getCore().byId('__xmlview0--app');
+      var oView = this.getView('fplay.view.Main', 'XML');
       oApp.toMaster(oView.getId(), 'show');
     },
 

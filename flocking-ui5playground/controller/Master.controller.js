@@ -21,18 +21,34 @@ sap.ui.define([
 
     /* events */
 
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onInit: function (oControlEvent) {
+      this._oComponent = sap.ui.core.Component.getOwnerComponentFor(
+          this.getView()
+      );
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
     loadExample: function (oControlEvent) {
-      var oContext = oControlEvent.getParameters().listItem
-                     .getBindingContext('examples');
-      var oBinding = oContext.getModel()
-                     .aBindings.filter(function (oJSONListBinding) {
-                       return oJSONListBinding.getPath() === 'code';
-                     })[0];
+      var oContext = oControlEvent.getParameter('listItem')
+                                  .getBindingContext('examples');
+      oContext.getModel().aBindings
+          .filter(function (oJSONListBinding) {
+            return oJSONListBinding.getPath() === 'code';
+          })
+          .forEach(function (oBinding) {
+            oBinding.setContext(oContext);
+          });
 
-      oBinding.setContext(oContext);
-
-      var oApp = this.getView().getParent().getParent();
-      oApp.toMaster(oApp.getDetailPages()[0]);
+      this._oComponent._oRouter.navToMain();
     },
 
     /**

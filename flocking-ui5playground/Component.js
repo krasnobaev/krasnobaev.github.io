@@ -9,7 +9,9 @@
 sap.ui.define([
   'sap/ui/core/UIComponent',
   'fplay/lib/Router',
-], function (UIComponent) {
+  'fplay/model/Examples',
+  'sap/m/routing/RouteMatchedHandler',
+], function (UIComponent, Router, ExamplesModel, RouteMatchedHandler) {
   'use strict';
 
   var Component = UIComponent.extend('fplay.Component', {
@@ -26,7 +28,6 @@ sap.ui.define([
           routerClass: 'fplay.lib.Router',
           viewType: 'XML',
           viewPath: 'fplay.view',
-          clearTarget: false,
           controlId: '__xmlview0--app',
           controlAggregation: 'detailPages',
         },
@@ -34,23 +35,37 @@ sap.ui.define([
         routes: [{
           pattern: '',
           name: 'main',
-          target: ['scenarios', 'managescenario'],
+          target: ['main', 'master'],
         }],
 
         targets: {
-          scenarios: {
+          master: {
             controlAggregation: 'masterPages',
             viewName: 'Master',
             viewId: 'Master',
           },
-
-          managescenario: {
-            viewPath: 'siuClassic.modules.manageScenario.view',
+          main: {
             viewName: 'Main',
             viewId: 'Main',
           },
         },
       },
+    },
+
+    _oRouter: null,
+    _oRouteHandler: null,
+
+    /**
+     *
+     */
+    init: function () {
+      UIComponent.prototype.init.apply(this, arguments);
+
+      this._oRouter = this.getRouter();
+      this._oRouteHandler = new RouteMatchedHandler(this._oRouter);
+      this._oRouter.initialize();
+
+      this.setModel(new ExamplesModel(), 'examples');
     },
 
   });
