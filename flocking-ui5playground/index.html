@@ -5,7 +5,6 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  <meta name="mobile-web-app-capable" content="yes">
 
   <!-- CodeMirror dependencies -->
   <script src="https://npmcdn.com/codemirror@5.11.0/lib/codemirror.js"></script>
@@ -22,11 +21,14 @@
   <!-- Flocking dependencies -->
   <script src="https://npmcdn.com/flocking@0.1.5/dist/flocking-all.js"></script>
 
-  <script id="sap-ui-bootstrap" type="text/javascript"
+  <script
+    id="sap-ui-bootstrap"
+    type="text/javascript"
     src="https://openui5.hana.ondemand.com/1.36.0/resources/sap-ui-core.js"
     data-sap-ui-theme="sap_bluecrystal"
     data-sap-ui-libs="sap.m"
     data-sap-ui-bindingSyntax="complex"
+    data-sap-ui-preload="async"
     data-sap-ui-resourceroots='{
       "fplay": "./",
       "zlib": "./zlib"
@@ -43,5 +45,5 @@
   </script>
 
 </head>
-<body class="sapUiBody" id="idBody" role="application"></body>
+<body class="sapUiBody" id="idBody"></body>
 </html>
