@@ -23,14 +23,9 @@ sap.ui.define([
      */
     onInit: function (oControlEvent) {
       this.getOwnerComponent().setApp(this.byId('app'));
-    },
-
-    /**
-     * [handleEventDesireMaster description]
-     * @return {[type]} [description]
-     */
-    handleEventDesireMaster: function () {
-      this.byId('app').showMaster();
+      this.getView().addStyleClass(
+          this.getOwnerComponent().getContentDensityClass()
+      );
     },
 
   });

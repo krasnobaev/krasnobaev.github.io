@@ -2,13 +2,13 @@
 <core:View
     controllerName="fplay.controller.Master"
     displayBlock="true"
-    class="sapUiSizeCompact MasterView"
+    class="MasterView"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:zlib="zlib"
 >
   <Page
-      title="Examples"
+      title="{i18n>examplesPageTitle}"
   >
     <subHeader>
       <Toolbar
@@ -25,8 +25,8 @@
     <List
         id="idExamplesList"
         mode="SingleSelectMaster"
-        noDataText="Examples not loaded"
-        selectionChange="loadExample"
+        noDataText="{i18n>examplesListNoDataText}"
+        selectionChange="onExampleSelected"
         items="{
           path: 'examples>/',
           sorter: {

@@ -2,29 +2,33 @@
 <core:View
     controllerName="fplay.controller.Detail"
     displayBlock="true"
-    class="sapUiSizeCompact DetailView"
+    class="DetailView"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:zlib="zlib"
 >
   <Page
-      title="Flocking Interactive Playground"
+      title="{i18n>detailPageTitle}"
       showNavButton="true"
       navButtonPress="onNavBack"
-      enableScrolling="false"
+      enableScrolling="true"
   >
     <content>
       <Toolbar>
         <ToggleButton
             icon="sap-icon://hello-world"
-            press="handleSayHelloWorld"
+            press="onHelloWorldPress"
+        />
+        <ToggleButton
+            icon="sap-icon://full-screen"
+            press="onGoFullscreen"
         />
 
         <ToolbarSpacer />
 
         <ToggleButton
             icon="sap-icon://play"
-            press="handleStopPlay"
+            press="onTogglePlayback"
         />
       </Toolbar>
 
